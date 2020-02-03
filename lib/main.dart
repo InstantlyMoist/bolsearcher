@@ -46,9 +46,9 @@ class _HomePageState extends State<HomePage> {
         products.add(Product(
           title: product['title'],
           rating: product['rating'],
-          price: 12.3,
+          price: product['offerData']['offers'][0]['price'],
           company: product['specsTag'] + " | " + product['summary'],
-          availability: "12",
+          availability: product['offerData']['offers'][0]['availabilityDescription'],
         ));
       }
       setState(() {
