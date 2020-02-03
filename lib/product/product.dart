@@ -1,10 +1,12 @@
-import 'package:bolsearcher/product/components/product_availability.dart';
-import 'package:bolsearcher/product/components/product_image.dart';
-import 'package:bolsearcher/product/components/product_price.dart';
-import 'package:bolsearcher/product/components/product_title.dart';
+import 'package:bolsearcher/product/components/product/product_availability.dart';
+import 'package:bolsearcher/product/components/product/product_image.dart';
+import 'package:bolsearcher/product/components/product/product_price.dart';
+import 'package:bolsearcher/product/components/product/product_title.dart';
+import 'package:bolsearcher/product/product_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import 'components/product_rating.dart';
+import 'components/product/product_rating.dart';
 
 // ignore: must_be_immutable
 class Product extends StatelessWidget {
@@ -15,12 +17,16 @@ class Product extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductScreen(data)),
+        );
+      },
       child: Container(
-        height: 250,
+        height: 300,
         decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(width: 1.0, color: Color(0xFFCCCCCC)))),
+            border: Border(bottom: BorderSide(width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5)))),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
@@ -33,17 +39,13 @@ class Product extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      ProductTitle(data['title'],
-                          data['specsTag'] + " | " + data['summary']),
+                      ProductTitle(data['title'], data['specsTag'] + " | " + data['summary']),
                       SizedBox(height: 5),
                       ProductRating(data['rating'] / 1.0),
                       SizedBox(height: 10),
                       ProductPrice(data['offerData']['offers'][0]['price']),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ProductAvailability(data['offerData']['offers'][0]
-                          ['availabilityDescription']),
+                      SizedBox(height: 10),
+                      ProductAvailability(data['offerData']['offers'][0]['availabilityDescription']),
                     ],
                   ),
                 ),
