@@ -28,14 +28,12 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   void showBarcode() async {
-    print('Starting barcode');
     await FlutterBarcodeScanner.scanBarcode(
             "#FF0000", "Cancel", true, ScanMode.DEFAULT)
-        .then((data) => handleSubmission(data));
+        .then((data) => handleSubmission("BARCODE" + data));
   }
 
   void handleSubmission(String text) {
-    print('Getting new project');
     widget.callback(text);
   }
 

@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:bolsearcher/components/filter_button.dart';
 import 'package:bolsearcher/components/filter_popup.dart';
+import 'package:bolsearcher/components/welcome_screen.dart';
 import 'package:bolsearcher/product/product.dart';
+import 'package:bolsearcher/product/product_screen.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:bolsearcher/components/logo.dart';
@@ -47,6 +49,11 @@ class _HomePageState extends State<HomePage> {
 
   Future<http.Response> fetchPost(String text) async {
     products = new List();
+    bool barcode = false;
+    if (text.startsWith("BARCODE")) {
+      barcode = true;
+      text = text.replaceAll("BARCODE", "");
+    }
     lastSearchQuery = text;
     setState(() {
       main = Column(
@@ -60,8 +67,16 @@ class _HomePageState extends State<HomePage> {
     final response = await http.get(url + text + "&sort=" + prefs.getString("filter"));
     if (response.statusCode == 200) {
       for (Map<String, dynamic> product in json.decode(response.body)['products']) {
+        if (barcode) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProductScreen(product)),
+          );
+          break;
+        }
         products.add(Product(product));
       }
+
       setState(() {
         products;
       });
@@ -71,7 +86,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget main = new Text("Nothing to show!");
+  Widget main = WelcomeScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +95,7 @@ class _HomePageState extends State<HomePage> {
         WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: ClipRRect(
             borderRadius: BorderRadius.zero,
