@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 // ignore: must_be_immutable
-class Rating extends StatelessWidget {
+class ProductRating extends StatelessWidget {
   double rating;
-  Rating(double rating) : this.rating = rating / 10;
+  ProductRating(double rating) : this.rating = rating / 10;
 
   @override
   Widget build(BuildContext context) {

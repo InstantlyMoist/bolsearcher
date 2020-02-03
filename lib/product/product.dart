@@ -1,6 +1,7 @@
 import 'package:bolsearcher/product/productimage.dart';
+import 'package:bolsearcher/product/productprice.dart';
 import 'package:bolsearcher/product/producttitle.dart';
-import 'package:bolsearcher/product/rating.dart';
+import 'package:bolsearcher/product/productrating.dart';
 import 'package:flutter/cupertino.dart';
 
 // ignore: must_be_immutable
@@ -9,30 +10,27 @@ class Product extends StatelessWidget {
   String title, company, availability, url;
   double price;
 
-  Product(
-      {this.title,
-      this.company,
-      this.rating,
-      this.availability,
-      this.price,
-      this.url});
+  Product({
+    this.title,
+    this.company,
+    this.rating,
+    this.availability,
+    this.price,
+    this.url
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190,
+      height: 250,
       decoration: BoxDecoration(
           border:
               Border(bottom: BorderSide(width: 1.0, color: Color(0xFFCCCCCC)))),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(15.0),
         child: Row(
           children: <Widget>[
-            Container(
-              width: 100,
-              height: 100,
-              child: ProductImage(url),
-            ),
+            ProductImage(url),
             SizedBox(width: 25),
             Flexible(
               child: Padding(
@@ -41,8 +39,10 @@ class Product extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     ProductTitle(title, company),
+                    SizedBox(height: 5),
+                    ProductRating(rating / 1.0),
                     SizedBox(height: 10),
-                    Rating(rating / 1.0),
+                    ProductPrice(50.0)
                   ],
                 ),
               ),
