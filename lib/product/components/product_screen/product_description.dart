@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 // ignore: must_be_immutable
 class ProductDescription extends StatelessWidget {
@@ -7,7 +8,7 @@ class ProductDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return HtmlWidget(
         description
     );
   }
