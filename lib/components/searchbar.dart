@@ -43,7 +43,6 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFEFF6FF),
-      margin: EdgeInsets.only(bottom: 20),
       width: MediaQuery.of(context).size.width * 0.95,
       child: TextField(
         onSubmitted: handleSubmission,

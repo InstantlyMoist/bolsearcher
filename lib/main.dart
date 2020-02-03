@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:bolsearcher/components/filter_button.dart';
+import 'package:bolsearcher/components/filter_popup.dart';
 import 'package:bolsearcher/product/product.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:bolsearcher/components/logo.dart';
 import 'package:bolsearcher/components/searchbar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,15 +41,23 @@ class _HomePageState extends State<HomePage> {
 
   List<Product> products = new List();
 
+  String lastSearchQuery;
+
+  void handleRefresh() {
+    if (lastSearchQuery == null) return;
+    fetchPost(lastSearchQuery);
+  }
+
   Future<http.Response> fetchPost(String text) async {
     products = new List();
+    lastSearchQuery = text;
     setState(() {
       main = CircularProgressIndicator();
     });
-    final response = await http.get(url + text);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final response = await http.get(url + text + "&sort=" + prefs.getString("filter"));
     if (response.statusCode == 200) {
-      for (Map<String, dynamic> product
-          in json.decode(response.body)['products']) {
+      for (Map<String, dynamic> product in json.decode(response.body)['products']) {
         products.add(Product(product));
       }
       setState(() {
@@ -74,6 +85,23 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Logo(),
                 SearchBar(callback: fetchPost),
+                Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  color: Color(0xFF0000a4),
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 18,
+                      ),
+                      FilterButton(
+                        callback: () {
+                          showDialog(context: context, child: FilterPopup(callback: handleRefresh,));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: SizedBox(
                     child: products.isEmpty

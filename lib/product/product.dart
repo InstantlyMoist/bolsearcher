@@ -1,12 +1,12 @@
 import 'package:bolsearcher/product/components/product/product_availability.dart';
 import 'package:bolsearcher/product/components/product/product_image.dart';
 import 'package:bolsearcher/product/components/product/product_price.dart';
+import 'package:bolsearcher/product/components/product/product_rating.dart';
 import 'package:bolsearcher/product/components/product/product_title.dart';
 import 'package:bolsearcher/product/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/product/product_rating.dart';
 
 // ignore: must_be_immutable
 class Product extends StatelessWidget {
@@ -16,6 +16,9 @@ class Product extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String summary = data['summary'];
+    if (summary == null) summary = "";
+    else summary = " | " + summary;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -39,7 +42,8 @@ class Product extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      ProductTitle(data['title'], data['specsTag'] + " | " + data['summary']),
+                      ProductTitle(data['title'],
+                          data['specsTag'] + summary),
                       SizedBox(height: 5),
                       ProductRating(data['rating'] / 1.0),
                       SizedBox(height: 10),
