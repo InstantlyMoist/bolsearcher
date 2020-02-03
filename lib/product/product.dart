@@ -1,5 +1,6 @@
 
 import 'package:bolsearcher/product/producttitle.dart';
+import 'package:bolsearcher/product/rating.dart';
 import 'package:flutter/cupertino.dart';
 
 // ignore: must_be_immutable
@@ -34,8 +35,10 @@ class Product extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0,20,10.0, 10.0),
               child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    ProductTitle(title, company)
+                    ProductTitle(title, company),
+                    Rating(50),
                   ],
                 ),
             )
