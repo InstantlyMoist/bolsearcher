@@ -16,34 +16,44 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-                ProductImages(data['media']),
-                Container(
-                  margin: EdgeInsets.all(15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        ProductPrice(data['offerData']['offers'][0]['price']),
-                        SizedBox(height: 10),
-                        ProductTitle(data['title'], data['specsTag'] + " | " + data['summary']),
-                        SizedBox(height: 10),
-                        ProductRating(data['rating'] / 1.0),
-                        SizedBox(height: 15),
-                        ProductAvailability(data['offerData']['offers'][0]['availabilityDescription']),
-                        SizedBox(height: 30),
-                        ProductDescription(data['longDescription']),
-                        SizedBox(height: 30),
-                        BuyProductButton()
-                      ],
-                    )
-                ),
-            ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xFFFFFFFF),
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      FlatButton(
+                        child: Icon(Icons.chevron_left),
+                        onPressed: () {Navigator.pop(context);},
+                      ),
+                      ProductImages(data['media']),
+                    ]
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          ProductPrice(data['offerData']['offers'][0]['price']),
+                          SizedBox(height: 10),
+                          ProductTitle(data['title'], data['specsTag'] + " | " + data['summary']),
+                          SizedBox(height: 10),
+                          ProductRating(data['rating'] / 1.0),
+                          SizedBox(height: 15),
+                          ProductAvailability(data['offerData']['offers'][0]['availabilityDescription']),
+                          SizedBox(height: 20),
+                          ProductDescription(data['longDescription']),
+                          SizedBox(height: 30),
+                          BuyProductButton()
+                        ],
+                      )
+                  ),
+              ],
+            ),
           ),
-        ),
+      ),
     );
   }
 }
