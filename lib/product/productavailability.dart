@@ -10,7 +10,8 @@ class ProductAvailability extends StatelessWidget {
     return Text(
       availability,
       style: TextStyle(
-        color: Color(0xFF01982b)
+        fontSize: 13,
+        color: Color(0xFF82BF93)
       ),
     );
   }

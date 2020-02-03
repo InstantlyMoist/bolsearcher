@@ -1,3 +1,4 @@
+import 'package:bolsearcher/product/productavailability.dart';
 import 'package:bolsearcher/product/productimage.dart';
 import 'package:bolsearcher/product/productprice.dart';
 import 'package:bolsearcher/product/producttitle.dart';
@@ -42,7 +43,9 @@ class Product extends StatelessWidget {
                     SizedBox(height: 5),
                     ProductRating(rating / 1.0),
                     SizedBox(height: 10),
-                    ProductPrice(50.0)
+                    ProductPrice(price),
+                    SizedBox(height: 10,),
+                    ProductAvailability(availability),
                   ],
                 ),
               ),
