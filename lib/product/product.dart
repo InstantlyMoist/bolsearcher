@@ -1,9 +1,10 @@
-import 'package:bolsearcher/product/productavailability.dart';
-import 'package:bolsearcher/product/productimage.dart';
-import 'package:bolsearcher/product/productprice.dart';
-import 'package:bolsearcher/product/producttitle.dart';
-import 'package:bolsearcher/product/productrating.dart';
+import 'package:bolsearcher/product/components/product_availability.dart';
+import 'package:bolsearcher/product/components/product_image.dart';
+import 'package:bolsearcher/product/components/product_price.dart';
+import 'package:bolsearcher/product/components/product_title.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'components/product_rating.dart';
 
 // ignore: must_be_immutable
 class Product extends StatelessWidget {
