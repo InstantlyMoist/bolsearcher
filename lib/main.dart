@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
       home: HomePage(
         title: "HomePage",
       ),
+      theme: ThemeData(
+        fontFamily: 'OpenSans'
+      ),
     );
   }
 }
