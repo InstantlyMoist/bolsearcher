@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   String url =
       "https://api.bol.com/catalog/v4/search/?apikey=25C4742A92BF468EB2BD888FC8FBFF40&format=json&q=";
 
-  List<Product> products;
+  List<Product> products = new List();
 
   Future<http.Response> fetchPost(String text) async {
     products = new List();

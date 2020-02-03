@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 
 // ignore: must_be_immutable
 class Product extends StatelessWidget {
-  String title, company, rating, availability;
+  int rating;
+  String title, company, availability;
   double price;
 
 
@@ -27,15 +28,17 @@ class Product extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.3,
             ),
             SizedBox(width: 35),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10.0,20,10.0, 10.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    ProductTitle(title, company),
-                    Rating(50),
-                  ],
-                ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10.0,20,10.0, 10.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      ProductTitle(title, company),
+                      Rating(rating / 10.0),
+                    ],
+                  ),
+              ),
             )
           ],
         ),
