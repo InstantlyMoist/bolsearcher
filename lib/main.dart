@@ -52,7 +52,12 @@ class _HomePageState extends State<HomePage> {
     products = new List();
     lastSearchQuery = text;
     setState(() {
-      main = CircularProgressIndicator();
+      main = Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(width: 50, height: 50,child: CircularProgressIndicator()),
+        ],
+      );
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final response = await http.get(url + text + "&sort=" + prefs.getString("filter"));
@@ -73,47 +78,52 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ClipRRect(
-          borderRadius: BorderRadius.zero,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Colors.white,
-            child: Column(
-              children: <Widget>[
-                Logo(),
-                SearchBar(callback: fetchPost),
-                Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  color: Color(0xFF0000a4),
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 18,
-                      ),
-                      FilterButton(
-                        callback: () {
-                          showDialog(context: context, child: FilterPopup(callback: handleRefresh,));
-                        },
-                      ),
-                    ],
+    return GestureDetector(
+      onTap: () {
+        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: ClipRRect(
+            borderRadius: BorderRadius.zero,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              color: Colors.white,
+              child: Column(
+                children: <Widget>[
+                  Logo(),
+                  SearchBar(callback: fetchPost),
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    color: Color(0xFF0000a4),
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(
+                          width: 18,
+                        ),
+                        FilterButton(
+                          callback: () {
+                            showDialog(context: context, child: FilterPopup(callback: handleRefresh,));
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: products.isEmpty
-                        ? main
-                        : ListView.builder(
-                            itemCount: products.length,
-                            itemBuilder: (context, index) {
-                              return products[index];
-                            }),
+                  Expanded(
+                    child: SizedBox(
+                      child: products.isEmpty
+                          ? main
+                          : ListView.builder(
+                              itemCount: products.length,
+                              itemBuilder: (context, index) {
+                                return products[index];
+                              }),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

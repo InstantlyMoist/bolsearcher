@@ -13,10 +13,10 @@ class FilterButton extends StatelessWidget {
       onTap: callback,
       child: Row(
         children: <Widget>[
-          SizedBox(width: 8,),
           Icon(
             Icons.sort,
             color: Colors.white,
+            size: 16,
           ),
           SizedBox(
             width: 8,
