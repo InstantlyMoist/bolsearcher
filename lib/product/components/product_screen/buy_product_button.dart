@@ -15,7 +15,7 @@ class BuyProductButton extends StatelessWidget {
           )
       ),
       padding: EdgeInsets.all(15.0),
-      splashColor: Color(0xFFcccccc),
+      splashColor: Color(0xFFcccccc).withOpacity(0.3),
       color: Color(0xFFffe900),
       onPressed: () {},
     );
