@@ -25,7 +25,7 @@ class ProductPrice extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 1.0),
+                padding: const EdgeInsets.only(top: 2.0),
                 child: Text (
                   split[1] == "0" ? "-" : split[1],
                   style: TextStyle(

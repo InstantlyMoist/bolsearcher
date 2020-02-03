@@ -47,15 +47,7 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       for (Map<String, dynamic> product
           in json.decode(response.body)['products']) {
-        products.add(Product(
-          title: product['title'],
-          rating: product['rating'],
-          price: product['offerData']['offers'][0]['price'],
-          company: product['specsTag'] + " | " + product['summary'],
-          availability: product['offerData']['offers'][0]
-              ['availabilityDescription'],
-          url: product['images'][2]['url'],
-        ));
+        products.add(Product(product));
       }
       setState(() {
         products;
