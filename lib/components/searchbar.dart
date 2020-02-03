@@ -1,8 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-// ignore: must_be_immutable
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -10,7 +9,6 @@ class SearchBar extends StatefulWidget {
   Function(String) callback;
 
   SearchBar({this.callback});
-
 }
 
 class _SearchBarState extends State<SearchBar> {
@@ -29,7 +27,13 @@ class _SearchBarState extends State<SearchBar> {
     textController.dispose();
   }
 
-  void _handleSubmission(String text) {
+  void showBarcode() async {
+    await FlutterBarcodeScanner.scanBarcode(
+            "#FF0000", "Cancel", true, ScanMode.DEFAULT)
+        .then((data) => handleSubmission(data));
+  }
+
+  void handleSubmission(String text) {
     widget.callback(text);
   }
 
@@ -39,7 +43,7 @@ class _SearchBarState extends State<SearchBar> {
       color: Color(0xFFEFF6FF),
       width: MediaQuery.of(context).size.width * 0.95,
       child: TextField(
-        onSubmitted: _handleSubmission,
+        onSubmitted: handleSubmission,
         controller: textController,
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -62,7 +66,7 @@ class _SearchBarState extends State<SearchBar> {
           suffixIcon: IconButton(
             icon: Icon(Icons.center_focus_weak),
             color: bolColor,
-            onPressed: () => print('pressed'),
+            onPressed: () => showBarcode(),
           ),
         ),
       ),

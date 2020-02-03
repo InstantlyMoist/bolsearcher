@@ -8,13 +8,8 @@ class Product extends StatelessWidget {
   String title, company, rating, availability;
   double price;
 
-  Product(title, company, rating, price, availability) {
-    this.title = title;
-    this.company = company;
-    this.rating = rating;
-    this.price = price;
-    this.availability = availability;
-  }
+
+  Product({this.title, this.company, this.rating, this.availability, this.price});
 
   @override
   Widget build(BuildContext context) {
