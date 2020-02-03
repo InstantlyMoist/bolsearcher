@@ -1,9 +1,37 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatefulWidget {
+  @override
+  _SearchBarState createState() => _SearchBarState();
 
+  Function(String) callback;
+
+  SearchBar({this.callback});
+
+
+}
+
+class _SearchBarState extends State<SearchBar> {
   Color bolColor = Color(0xFF0000a4);
+
+  final textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+  }
+
+  void _handleSubmission(String text) {
+    widget.callback(text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,15 +39,26 @@ class SearchBar extends StatelessWidget {
       color: Color(0xFFEFF6FF),
       width: MediaQuery.of(context).size.width * 0.95,
       child: TextField(
+        onSubmitted: _handleSubmission,
+        controller: textController,
         decoration: InputDecoration(
           border: InputBorder.none,
           fillColor: bolColor,
           hoverColor: bolColor,
           labelText: "Waar ben je naar op zoek?",
-          labelStyle: TextStyle (
+          labelStyle: TextStyle(
             color: bolColor,
           ),
-          prefixIcon: Icon(Icons.search, color: bolColor,),
+          prefixIcon: IconButton(
+            icon: Icon(
+              Icons.search,
+              color: bolColor,
+            ),
+            onPressed: () {
+              textController.clear();
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+          ),
           suffixIcon: IconButton(
             icon: Icon(Icons.center_focus_weak),
             color: bolColor,
