@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(
         title: "HomePage",
       ),
-      theme: ThemeData(
-        fontFamily: 'OpenSans'
-      ),
+      theme: ThemeData(fontFamily: 'OpenSans'),
     );
   }
 }
@@ -42,6 +40,9 @@ class _HomePageState extends State<HomePage> {
 
   Future<http.Response> fetchPost(String text) async {
     products = new List();
+    setState(() {
+      main = CircularProgressIndicator();
+    });
     final response = await http.get(url + text);
     if (response.statusCode == 200) {
       for (Map<String, dynamic> product
@@ -51,7 +52,8 @@ class _HomePageState extends State<HomePage> {
           rating: product['rating'],
           price: product['offerData']['offers'][0]['price'],
           company: product['specsTag'] + " | " + product['summary'],
-          availability: product['offerData']['offers'][0]['availabilityDescription'],
+          availability: product['offerData']['offers'][0]
+              ['availabilityDescription'],
           url: product['images'][2]['url'],
         ));
       }
@@ -63,6 +65,8 @@ class _HomePageState extends State<HomePage> {
       throw Exception('Failed to load post');
     }
   }
+
+  Widget main = new Text("Nothing to show!");
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +84,13 @@ class _HomePageState extends State<HomePage> {
                 SearchBar(callback: fetchPost),
                 Expanded(
                   child: SizedBox(
-                    child: products.isEmpty ? Text("empty") : ListView.builder(
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          return products[index];
-                        }),
+                    child: products.isEmpty
+                        ? main
+                        : ListView.builder(
+                            itemCount: products.length,
+                            itemBuilder: (context, index) {
+                              return products[index];
+                            }),
                   ),
                 ),
               ],
