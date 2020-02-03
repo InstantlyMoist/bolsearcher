@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
 
   Color bolColor = Color(0xFF0000a4);

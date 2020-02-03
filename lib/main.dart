@@ -1,5 +1,6 @@
 import 'package:bolsearcher/components/logo.dart';
 import 'package:bolsearcher/components/searchbar.dart';
+import 'package:bolsearcher/product/product.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: ClipRRect (
+          borderRadius: BorderRadius.circular(0),
          child: Container(
            width: MediaQuery.of(context).size.width,
            color: Colors.white,
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
              children: <Widget>[
                Logo(),
                SearchBar(),
-
+               Product("Product","Happy Socks", "5", 50.0, "yes")
              ],
            ),
          ),
