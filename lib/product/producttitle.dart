@@ -17,7 +17,13 @@ class ProductTitle extends StatelessWidget {
             fontWeight: FontWeight.bold
           ),
         ),
-        Text(company),
+        SizedBox(height: 5),
+        Text(
+          company,
+          style: TextStyle(
+            color: Color(0xFF828282 )
+          ),
+        ),
       ],
     );
   }
