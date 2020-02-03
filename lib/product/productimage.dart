@@ -8,7 +8,6 @@ class ProductImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 135,
       child: Image.network(url)
     );
   }

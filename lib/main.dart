@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
           price: product['offerData']['offers'][0]['price'],
           company: product['specsTag'] + " | " + product['summary'],
           availability: product['offerData']['offers'][0]['availabilityDescription'],
+          url: product['images'][2]['url'],
         ));
       }
       setState(() {
