@@ -7,7 +7,6 @@ import 'package:bolsearcher/product/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 // ignore: must_be_immutable
 class Product extends StatelessWidget {
   Map<String, dynamic> data;
@@ -17,8 +16,14 @@ class Product extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String summary = data['summary'];
-    if (summary == null) summary = "";
-    else summary = " | " + summary;
+    if (summary == null)
+      summary = "";
+    else
+      summary = " | " + summary;
+
+    String image;
+    if (data['images'] == null) image = "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
+    else image = data['images'][2]['url'];
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -29,12 +34,14 @@ class Product extends StatelessWidget {
       child: Container(
         height: 300,
         decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5)))),
+            border: Border(
+                bottom: BorderSide(
+                    width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5)))),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
             children: <Widget>[
-              ProductImage(data['images'][2]['url']),
+              ProductImage(image),
               SizedBox(width: 25),
               Flexible(
                 child: Padding(
@@ -42,14 +49,14 @@ class Product extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      ProductTitle(data['title'],
-                          data['specsTag'] + summary),
+                      ProductTitle(data['title'], data['specsTag'] + summary),
                       SizedBox(height: 5),
                       ProductRating(data['rating'] / 1.0),
                       SizedBox(height: 10),
                       ProductPrice(data['offerData']['offers'][0]['price']),
                       SizedBox(height: 10),
-                      ProductAvailability(data['offerData']['offers'][0]['availabilityDescription']),
+                      ProductAvailability(data['offerData']['offers'][0]
+                          ['availabilityDescription']),
                     ],
                   ),
                 ),

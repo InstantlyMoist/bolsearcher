@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class ProductImages extends StatelessWidget {
   ProductImages(data);
 
-
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
