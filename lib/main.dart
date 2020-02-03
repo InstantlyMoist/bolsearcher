@@ -63,17 +63,6 @@ class _HomePageState extends State<HomePage> {
              ],
            ),
          ),
-        child: ClipRRect(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white,
-            child: Column(
-              children: <Widget>[
-                Logo(),
-                SearchBar(callback: fetchPost),
-              ],
-            ),
-          ),
         ),
       ),
     );

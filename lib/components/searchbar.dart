@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class SearchBar extends StatelessWidget {
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
