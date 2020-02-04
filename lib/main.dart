@@ -66,6 +66,12 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final response = await http.get(url + text + "&sort=" + prefs.getString("filter"));
     if (response.statusCode == 200) {
+      bool hasProducts = json.decode(response.body)['products'] != null;
+      if (!hasProducts) {
+        main = WelcomeScreen();
+        print("found none");
+        return null;
+      }
       for (Map<String, dynamic> product in json.decode(response.body)['products']) {
         if (barcode) {
           main = WelcomeScreen();
@@ -77,12 +83,10 @@ class _HomePageState extends State<HomePage> {
         }
         products.add(Product(product));
       }
-
       setState(() {
         products;
       });
     } else {
-      //TODO: Give front-end response
       throw Exception('Failed to load post');
     }
   }
