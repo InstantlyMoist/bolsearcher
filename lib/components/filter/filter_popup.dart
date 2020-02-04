@@ -60,9 +60,6 @@ class _FilterPopupState extends State<FilterPopup> {
         width: MediaQuery.of(context).size.width * 0.8,
         child: Column(
           children: <Widget>[
-            SizedBox(
-              width: 16,
-            ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -75,11 +72,11 @@ class _FilterPopupState extends State<FilterPopup> {
               child: Row(
                 children: <Widget>[
                   SizedBox(
-                    width: 16,
+                    width: 20,
                   ),
                   Text(
                     "Sorteren op",
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
               ),
@@ -97,10 +94,10 @@ class _FilterPopupState extends State<FilterPopup> {
                           color: filterItems[index].selected
                               ? Color(0xFFF4F4F4)
                               : Colors.white,
-                          height: 80,
+                          height: 75,
                           child: Row(
                             children: <Widget>[
-                              SizedBox(width: 16,),
+                              SizedBox(width: 20,),
                               Text(filterItems[index].displayName),
                             ],
                           ),

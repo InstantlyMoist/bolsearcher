@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:bolsearcher/components/filter_button.dart';
-import 'package:bolsearcher/components/filter_popup.dart';
+import 'package:bolsearcher/components/filter/filter_button.dart';
 import 'package:bolsearcher/components/welcome_screen.dart';
 import 'package:bolsearcher/product/product.dart';
 import 'package:bolsearcher/product/product_screen.dart';
@@ -11,6 +10,8 @@ import 'package:bolsearcher/components/logo.dart';
 import 'package:bolsearcher/components/searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'components/filter/filter_popup.dart';
 
 void main() => runApp(MyApp());
 
