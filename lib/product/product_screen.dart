@@ -26,8 +26,10 @@ class ProductScreen extends StatelessWidget {
                     children: <Widget>[
                       ProductImages(data['media']),
                       Container(
-                        margin: EdgeInsets.only(top: 10),
+                        width: 35,
+                        margin: EdgeInsets.only(top: 10, left: 10),
                         child: FlatButton(
+                          padding: EdgeInsets.only(left: 0),
                           child: Icon(Icons.arrow_back),
                           onPressed: () {Navigator.pop(context);},
                         ),

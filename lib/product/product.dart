@@ -37,7 +37,9 @@ class Product extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
-                    width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5)))),
+                    width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5))
+            )
+        ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(

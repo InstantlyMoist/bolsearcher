@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:bolsearcher/components/filter/filter_button.dart';
-import 'package:bolsearcher/components/welcome_screen.dart';
 import 'package:bolsearcher/product/product.dart';
 import 'package:bolsearcher/product/product_screen.dart';
+import 'package:bolsearcher/welcome_screen.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:bolsearcher/components/logo.dart';
-import 'package:bolsearcher/components/searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'components/filter/filter_popup.dart';
+import 'header/logo.dart';
+import 'header/options/filter_button.dart';
+import 'header/options/filter_popup.dart';
+import 'header/searchbar.dart';
 
 void main() => runApp(MyApp());
 
