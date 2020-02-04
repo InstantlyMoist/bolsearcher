@@ -27,11 +27,12 @@ class ProductScreen extends StatelessWidget {
                       ProductImages(data['media']),
                       Container(
                         width: 35,
+                        height: 35,
                         decoration: BoxDecoration(
                           color: Color(0xFFFFFFFF).withOpacity(0.8),
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        margin: EdgeInsets.only(top: 10, left: 10),
+                        margin: EdgeInsets.only(top: 20, left: 10),
                         child: FlatButton(
                           padding: EdgeInsets.only(left: 0),
                           child: Icon(Icons.arrow_back),
