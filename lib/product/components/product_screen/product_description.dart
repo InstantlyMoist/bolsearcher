@@ -8,6 +8,7 @@ class ProductDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (description == null) description = "Geen productbeschrijving gevonden";
     return HtmlWidget(
         description
     );
