@@ -68,6 +68,7 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       for (Map<String, dynamic> product in json.decode(response.body)['products']) {
         if (barcode) {
+          main = WelcomeScreen();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ProductScreen(product)),
