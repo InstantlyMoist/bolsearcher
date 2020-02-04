@@ -24,11 +24,14 @@ class ProductScreen extends StatelessWidget {
               children: <Widget>[
                   Stack(
                     children: <Widget>[
-                      FlatButton(
-                        child: Icon(Icons.chevron_left),
-                        onPressed: () {Navigator.pop(context);},
-                      ),
                       ProductImages(data['media']),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: FlatButton(
+                          child: Icon(Icons.arrow_back),
+                          onPressed: () {Navigator.pop(context);},
+                        ),
+                      ),
                     ]
                   ),
                   Container(
