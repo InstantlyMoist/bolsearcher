@@ -16,10 +16,11 @@ class Product extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String summary = data['summary'];
-    if (summary == null)
-      summary = "";
-    else
-      summary = " | " + summary;
+    if (summary == null) summary = "";
+    else summary = " | " + summary;
+
+    String specsTag = data['specsTag'];
+    if (specsTag == null) specsTag = "";
 
     String image;
     if (data['images'] == null) image = "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
@@ -49,7 +50,7 @@ class Product extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      ProductTitle(data['title'], data['specsTag'] + summary),
+                      ProductTitle(data['title'], specsTag + summary),
                       SizedBox(height: 5),
                       ProductRating(data['rating'] / 1.0),
                       SizedBox(height: 10),
