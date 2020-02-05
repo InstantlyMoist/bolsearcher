@@ -23,6 +23,7 @@ class ProductImages extends StatelessWidget {
 // ignore: must_be_immutable
 class OneImage extends StatelessWidget {
   String img;
+
   OneImage() : this.img = "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
   OneImage.media(img) : this.img = img;
 

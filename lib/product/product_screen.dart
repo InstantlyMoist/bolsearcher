@@ -49,7 +49,7 @@ class ProductScreen extends StatelessWidget {
                     ]
                   ),
                   Container(
-                    margin: EdgeInsets.all(15),
+                    margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 35),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -63,7 +63,7 @@ class ProductScreen extends StatelessWidget {
                           SizedBox(height: 20),
                           ProductDescription(data['longDescription']),
                           SizedBox(height: 30),
-                          BuyProductButton()
+                          BuyProductButton(),
                         ],
                       )
                   ),
