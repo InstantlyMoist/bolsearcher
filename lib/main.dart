@@ -71,7 +71,10 @@ class _HomePageState extends State<HomePage> {
     if (response.statusCode == 200) {
       bool hasProducts = json.decode(response.body)['products'] != null;
       if (!hasProducts) {
-        main = WelcomeScreen();
+        setState(() {
+          main = WelcomeScreen();
+        });
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Geen producten gevonden"),));
         print("found none");
         return null;
       }
@@ -138,6 +141,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget main = WelcomeScreen();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -145,6 +150,7 @@ class _HomePageState extends State<HomePage> {
         WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: ClipRRect(
