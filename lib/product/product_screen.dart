@@ -16,6 +16,13 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String summary = data['summary'];
+    if (summary == null) summary = "";
+    else summary = " | " + summary;
+
+    String specsTag = data['specsTag'];
+    if (specsTag == null) specsTag = "";
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
@@ -48,7 +55,7 @@ class ProductScreen extends StatelessWidget {
                         children: <Widget>[
                           ProductPrice(data['offerData']['offers'][0]['price']),
                           SizedBox(height: 10),
-                          ProductTitle(data['title'], data['specsTag'] + " | " + data['summary']),
+                          ProductTitle(data['title'], specsTag + summary),
                           SizedBox(height: 10),
                           ProductRating(data['rating'] / 1.0),
                           SizedBox(height: 15),
