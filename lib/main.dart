@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
       );
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString("filter") == null) prefs.setString("filter", "pricedesc");
     final response =
         await http.get(url + text + "&sort=" + prefs.getString("filter"));
     if (response.statusCode == 200) {
