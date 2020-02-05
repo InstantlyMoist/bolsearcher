@@ -16,6 +16,7 @@ class ProductTitle extends StatelessWidget {
             fontSize: 18,
             fontWeight: FontWeight.bold
           ),
+          maxLines: 3,
         ),
         SizedBox(height: 5),
         Text(

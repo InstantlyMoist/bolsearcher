@@ -31,6 +31,7 @@ class ImagesFound extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
+      autoPlay: true,
       height: 375.0,
       items: images.map((i) {
         return Builder(
