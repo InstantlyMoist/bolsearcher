@@ -10,20 +10,32 @@ class ProductImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (images == null) ? NoImageFound() : ImagesFound(images);
+    if (images == null) {
+        return OneImage();
+    } else if (images.length == 1) {
+       return OneImage.media(images[0]['url']);
+    } else {
+      return ImagesFound(images);
+    }
   }
 }
 
-class NoImageFound extends StatelessWidget{
+// ignore: must_be_immutable
+class OneImage extends StatelessWidget {
+  String img;
+  OneImage() : this.img = "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
+  OneImage.media(img) : this.img = img;
+
   @override
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        child: Image.network("http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png")
+        child: Image.network(img)
     );
   }
 }
 
+// ignore: must_be_immutable
 class ImagesFound extends StatelessWidget{
   List<dynamic> images;
   ImagesFound(images) : this.images = images;

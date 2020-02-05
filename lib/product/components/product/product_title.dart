@@ -24,6 +24,7 @@ class ProductTitle extends StatelessWidget {
           style: TextStyle(
             color: Color(0xFF828282 )
           ),
+          maxLines: 2,
         ),
       ],
     );
