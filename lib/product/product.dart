@@ -11,25 +11,36 @@ import 'package:flutter/material.dart';
 class Product extends StatelessWidget {
   Map<String, dynamic> data;
 
-  Product(this.data);
+  Product({this.data, this.callback});
+
+  Function(Product product, String string) callback;
 
   @override
   Widget build(BuildContext context) {
     String summary = data['summary'];
-    if (summary == null) summary = "";
-    else summary = " | " + summary;
+    if (summary == null)
+      summary = "";
+    else
+      summary = " | " + summary;
 
     String specsTag = data['specsTag'];
     if (specsTag == null) specsTag = "";
 
     String image;
-    if (data['images'] == null) image = "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
-    else image = data['images'][2]['url'];
+    if (data['images'] == null)
+      image =
+          "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
+    else
+      image = data['images'][2]['url'];
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProductScreen(data)),
+          MaterialPageRoute(
+              builder: (context) => ProductScreen(
+                    data: data,
+                    callback: (data) => callback(this, data),
+                  )),
         );
       },
       child: Container(
@@ -37,9 +48,7 @@ class Product extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
-                    width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5))
-            )
-        ),
+                    width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5)))),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(

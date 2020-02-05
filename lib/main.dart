@@ -37,7 +37,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String url = "https://api.bol.com/catalog/v4/search/?apikey=25C4742A92BF468EB2BD888FC8FBFF40&format=json&limit=100&q=";
+  String url =
+      "https://api.bol.com/catalog/v4/search/?apikey=25C4742A92BF468EB2BD888FC8FBFF40&format=json&limit=100&q=";
 
   List<Product> products = new List();
 
@@ -60,12 +61,13 @@ class _HomePageState extends State<HomePage> {
       main = Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(width: 50, height: 50,child: CircularProgressIndicator()),
+          Container(width: 50, height: 50, child: CircularProgressIndicator()),
         ],
       );
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final response = await http.get(url + text + "&sort=" + prefs.getString("filter"));
+    final response =
+        await http.get(url + text + "&sort=" + prefs.getString("filter"));
     if (response.statusCode == 200) {
       bool hasProducts = json.decode(response.body)['products'] != null;
       if (!hasProducts) {
@@ -73,16 +75,24 @@ class _HomePageState extends State<HomePage> {
         print("found none");
         return null;
       }
-      for (Map<String, dynamic> product in json.decode(response.body)['products']) {
+      for (Map<String, dynamic> product
+          in json.decode(response.body)['products']) {
         if (barcode) {
           main = WelcomeScreen();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ProductScreen(product)),
+            MaterialPageRoute(
+                builder: (context) => ProductScreen(
+                      data: product,
+                      callback: null,
+                    )),
           );
           break;
         }
-        products.add(Product(product));
+        products.add(Product(
+          data: product,
+          callback: (product, string) => test(product, string),
+        ));
       }
       setState(() {
         products;
@@ -90,6 +100,40 @@ class _HomePageState extends State<HomePage> {
     } else {
       throw Exception('Failed to load post');
     }
+  }
+
+  int currentIndex = 0;
+
+  int getNewIndex(String direction) {
+    int newIndex = currentIndex += direction == "left" ? 1 : -1;
+    currentIndex = newIndex;
+    return newIndex;
+  }
+
+  void test(Product product, String answer) {
+    if (answer == 'none') return;
+    currentIndex = products.indexOf(product);
+    getNewIndex(answer);
+    if (currentIndex < 0) currentIndex = 0;
+    nextIndex(currentIndex, answer);
+  }
+
+  void nextIndex(int index, String answer) {
+    if (answer == 'none') return;
+    Navigator.of(context).pop();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductScreen(
+          data: products[currentIndex].data,
+          callback: (data) {
+            this.getNewIndex(data);
+            if (currentIndex < 0) currentIndex = 0;
+            this.nextIndex(currentIndex, data);
+          },
+        ),
+      ),
+    );
   }
 
   Widget main = WelcomeScreen();
@@ -124,7 +168,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         FilterButton(
                           callback: () {
-                            showDialog(context: context, child: FilterPopup(callback: handleRefresh,));
+                            showDialog(
+                                context: context,
+                                child: FilterPopup(
+                                  callback: handleRefresh,
+                                ));
                           },
                         ),
                       ],

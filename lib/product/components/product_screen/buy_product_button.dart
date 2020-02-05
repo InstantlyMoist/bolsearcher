@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BuyProductButton extends StatelessWidget {
+
+  String url;
+
+
+  BuyProductButton(this.url);
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
@@ -26,7 +33,18 @@ class BuyProductButton extends StatelessWidget {
         padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
         splashColor: Color(0xFFcccccc).withOpacity(0.3),
         color: Color(0xFFffe900),
-        onPressed: () {}
+        onPressed: () {
+          _launchURL();
+        }
     );
+
+  }
+
+  _launchURL() async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
