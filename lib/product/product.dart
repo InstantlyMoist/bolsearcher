@@ -32,23 +32,29 @@ class Product extends StatelessWidget {
           "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
     else
       image = data['images'][2]['url'];
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ProductScreen(
-                    data: data,
-                    callback: (data) => callback(this, data),
-                  )),
+            builder: (context) => ProductScreen(
+              data: data,
+              callback: (data) => callback(this, data),
+            ),
+          ),
         );
       },
       child: Container(
-        height: 300,
+        height: 285,
         decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(
-                    width: 1.0, color: Color(0xFFCCCCCC).withOpacity(0.5)))),
+          border: Border(
+            bottom: BorderSide(
+              width: 1.0,
+              color: Color(0xFFCCCCCC).withOpacity(0.5),
+            ),
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(

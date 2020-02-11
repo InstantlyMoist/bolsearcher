@@ -26,7 +26,9 @@ class ProductImages extends StatelessWidget {
 class OneImage extends StatelessWidget {
   String img;
 
-  OneImage() : this.img = "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
+  OneImage()
+      : this.img =
+            "http://s.s-bol.com/nl/static/images/main/noimage_226x213default.png";
   OneImage.media(img) : this.img = img;
 
   @override
@@ -65,7 +67,8 @@ class _ImagesFoundState extends State<ImagesFound> {
                   builder: (BuildContext context) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
                       child: Center(child: Image.network(i['url'])),
                     );
                   },
@@ -73,7 +76,13 @@ class _ImagesFoundState extends State<ImagesFound> {
               },
             ).toList(),
           ),
-          ImageCounter(currentImage.toString() , widget.images.length.toString()),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15.0),
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: ImageCounter(
+                    currentImage.toString(), widget.images.length.toString())),
+          ),
         ],
       ),
     );
@@ -85,5 +94,3 @@ class _ImagesFoundState extends State<ImagesFound> {
     });
   }
 }
-
-

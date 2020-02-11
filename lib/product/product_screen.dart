@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'components/product_screen/buy_product_button.dart';
 import 'components/product_screen/images/product_images.dart';
+import 'components/product_screen/related/related_products_carousel.dart';
 
 // ignore: must_be_immutable
 class ProductScreen extends StatelessWidget {
@@ -18,16 +19,18 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String summary = data['summary'];
-    if (summary == null) summary = "";
-    else summary = " | " + summary;
+    if (summary == null)
+      summary = "";
+    else
+      summary = " | " + summary;
 
     String specsTag = data['specsTag'];
     if (specsTag == null) specsTag = "";
 
     void _onHorizontalDrag(DragEndDetails details) {
-      if(details.primaryVelocity == 0) {
+      if (details.primaryVelocity == 0) {
         callback("none");
-       return;
+        return;
       } // user have just tapped on screen (no dragging)
 
       if (details.primaryVelocity.compareTo(0) == -1)
@@ -37,55 +40,64 @@ class ProductScreen extends StatelessWidget {
     }
 
     return GestureDetector(
-      onHorizontalDragEnd: (DragEndDetails details) => _onHorizontalDrag(details),
+      onHorizontalDragEnd: (DragEndDetails details) =>
+          _onHorizontalDrag(details),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Color(0xFFFFFFFF),
-            body: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                    Stack(
-                      children: <Widget>[
-                        ProductImages(data['media']),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFFFFFF).withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          margin: EdgeInsets.only(top: 20, left: 10),
-                          child: FlatButton(
-                            padding: EdgeInsets.only(left: 0),
-                            child: Icon(Icons.arrow_back),
-                            onPressed: () {Navigator.pop(context);},
-                          ),
-                        ),
-                      ]
-                    ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    ProductImages(data['media']),
                     Container(
-                      margin: EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            ProductPrice(data['offerData']['offers'][0]['price']),
-                            SizedBox(height: 10),
-                            ProductTitle(data['title'], specsTag + summary),
-                            SizedBox(height: 10),
-                            ProductRating(data['rating'] / 1.0),
-                            SizedBox(height: 15),
-                            ProductAvailability(data['offerData']['offers'][0]['availabilityDescription']),
-                            SizedBox(height: 20),
-                            ProductDescription(data['longDescription']),
-                            SizedBox(height: 30),
-                            BuyProductButton(data['urls'][0]['value'])
-                          ],
-                        )
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFFFFFF).withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      margin: EdgeInsets.only(top: 20, left: 10),
+                      child: FlatButton(
+                        padding: EdgeInsets.only(left: 0),
+                        child: Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
-                ],
-              ),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      ProductPrice(data['offerData']['offers'][0]['price']),
+                      SizedBox(height: 10),
+                      ProductTitle(data['title'], specsTag + summary),
+                      SizedBox(height: 10),
+                      ProductRating(data['rating'] / 1.0),
+                      SizedBox(height: 15),
+                      ProductAvailability(data['offerData']['offers'][0]
+                          ['availabilityDescription']),
+                      SizedBox(height: 20),
+                      ProductDescription(data['longDescription']),
+                      SizedBox(height: 30),
+                      BuyProductButton(data['urls'][0]['value'])
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(20),
+                  child: RelatedProducts(data['id']),
+                ),
+                SizedBox(height: 15),
+              ],
             ),
           ),
+        ),
       ),
     );
   }
