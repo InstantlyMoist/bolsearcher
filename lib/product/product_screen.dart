@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'components/product_screen/buy_product_button.dart';
-import 'components/product_screen/product_images.dart';
+import 'components/product_screen/images/product_images.dart';
 
 // ignore: must_be_immutable
 class ProductScreen extends StatelessWidget {

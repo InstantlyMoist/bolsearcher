@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'image_counter.dart';
+
 // ignore: must_be_immutable
 class ProductImages extends StatelessWidget {
   List<dynamic> images;
@@ -75,28 +77,7 @@ class _ImagesFoundState extends State<ImagesFound> {
               },
             ).toList(),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 15.0),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: 60,
-                height: 22,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.black.withOpacity(0.65),
-                ),
-                child: Center(
-                  child: Text(
-                    (currentImage.toString() +
-                        " / " +
-                        widget.images.length.toString()),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          ImageCounter(currentImage.toString() , widget.images.length.toString()),
         ],
       ),
     );
