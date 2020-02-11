@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProductImages extends StatelessWidget {
   List<dynamic> images;
 
@@ -39,51 +38,75 @@ class OneImage extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class ImagesFound extends StatelessWidget {
+class ImagesFound extends StatefulWidget {
   List<dynamic> images;
+  ImagesFound(List<dynamic> imageList) : this.images = imageList;
 
-  ImagesFound(images) : this.images = images;
+  _ImagesFoundState createState() => _ImagesFoundState();
+}
+
+class _ImagesFoundState extends State<ImagesFound> {
+  int currentImage = 1;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 280,
       color: Color(0xfCCCCCC),
-      child: CarouselSlider(
-        autoPlay: true,
-        height: 375.0,
-        items: images.map(
-          (i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
-                  child: Stack(
-                    children: <Widget>[
-                      Center(child: Image.network(i['url'])),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: 100,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Center(
-                            child: Text((images.toList().indexOf(i) + 1).toString() + " / " + images.length.toString()),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+      child: Stack(
+        children: <Widget>[
+          CarouselSlider(
+            onPageChanged: (int index) {
+              _updateCounter(index);
+            },
+            autoPlay: true,
+            items: widget.images.map(
+              (i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 45.0, vertical: 45),
+                      child: Center(child: Image.network(i['url'])),
+                    );
+                  },
                 );
               },
-            );
-          },
-        ).toList(),
+            ).toList(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: 60,
+                height: 22,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black.withOpacity(0.65),
+                ),
+                child: Center(
+                  child: Text(
+                    (currentImage.toString() +
+                        " / " +
+                        widget.images.length.toString()),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+
+  _updateCounter(int index) {
+    setState(() {
+      this.currentImage = index + 1;
+    });
+  }
 }
+
+
