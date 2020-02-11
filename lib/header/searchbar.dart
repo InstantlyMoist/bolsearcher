@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+// ignore: must_be_immutable
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -13,7 +14,6 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   Color bolColor = Color(0xFF0000a4);
-
   final textController = TextEditingController();
 
   @override
@@ -34,6 +34,7 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   void handleSubmission(String text) {
+    if (text.isEmpty || text.trim().length == 0) return;
     widget.callback(text);
   }
 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bolsearcher/product/product.dart';
@@ -49,6 +50,7 @@ class _HomePageState extends State<HomePage> {
     fetchPost(lastSearchQuery);
   }
 
+  // ignore: missing_return
   Future<http.Response> fetchPost(String text) async {
     products = new List();
     bool barcode = false;

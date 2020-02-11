@@ -4,7 +4,7 @@ description: Met deze app kun je zoeken in de bol.com database
 version: 1.0.0+1
 
 environment:
-  sdk: ">=1.12.8 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
