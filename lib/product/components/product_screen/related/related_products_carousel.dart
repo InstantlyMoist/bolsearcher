@@ -56,25 +56,27 @@ class _RelatedProductsState extends State<RelatedProducts> {
         SizedBox(
           height: 25,
         ),
-        Container(
-          height: 285,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: SizedBox(
-                  child: products.isEmpty
-                      ? Container()
-                      : ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      return products[index];
-                    },
-                  ),
-                ),
+        Row(
+          children: <Widget>[
+            SizedBox(
+              height: 305,
+              width: MediaQuery.of(context).size.width - 40,
+              child: products.isEmpty
+                  ? Container()
+                  : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: <Widget>[
+                      products[index],
+                      SizedBox(height: 20,)
+                    ],
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
