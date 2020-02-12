@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage> {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
           content: Text("Geen producten gevonden"),
         ));
-        print("found none");
         return null;
       }
       for (Map<String, dynamic> product
