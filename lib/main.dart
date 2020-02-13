@@ -53,10 +53,11 @@ class _HomePageState extends State<HomePage> {
   // ignore: missing_return
   Future<http.Response> fetchPost(String text) async {
     products = new List();
+    const BARCODE = "BARCODE";
     bool barcode = false;
-    if (text.startsWith("BARCODE")) {
+    if (text.startsWith(BARCODE)) {
       barcode = true;
-      text = text.replaceAll("BARCODE", "");
+      text = text.replaceAll(BARCODE, ""); // <---- TODO
     }
     lastSearchQuery = text;
     setState(() {
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
         ],
       );
     });
+    //todo meer regels open laten
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("filter") == null)
       prefs.setString("filter", "pricedesc");
